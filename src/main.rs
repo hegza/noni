@@ -1,9 +1,5 @@
-mod entry;
-mod settings;
-mod time;
+mod cli;
 
-pub use time::Time;
-
-fn main() {
-    println!("Hello, world!");
+fn main() -> cli::Result<()> {
+    cli::run()
 }

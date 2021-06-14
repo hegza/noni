@@ -4,13 +4,23 @@ version = "0.1.0"
 authors = ["Henri Lunnikivi <henri.lunnikivi@tuni.fi>"]
 edition = "2018"
 
+[[bin]]
+name = "noni-cli"
+path = "src/main.rs"
+
+[lib]
+name = "noni"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+backtrace = "0.3.60"
 chrono = { version = "^0.4", features = ["serde"] }
 chrono-humanize = "0.1.1"
+crossterm = "0.20.0"
 gregorian = "0.2.0"
 humantime = "2.1.0"
 humantime-serde = "1.0.1"
 serde = { version = "^1.0", features = ["derive"] }
 serde_yaml = "^0.8"
+thiserror = "1.0.25"
