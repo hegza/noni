@@ -17,10 +17,11 @@ pub enum TriggerRule {
 /// This task can trigger repeatedly, possibly suspending subsequent triggers when first triggered. It's also possible to block or delay triggering during specific time-spans.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct RepeatRule {
-    stacks: bool,
     time_rule: TimeRule,
     except_on: Vec<GregorianSpan>,
     delay_on: Vec<GregorianSpan>,
+    /// If this rule stacks, it can trigger again after it has triggered once. Subsequent triggerings are added to the task's list of triggerings.
+    stacks: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -32,7 +33,7 @@ pub enum TimeRule {
     Gregorian(GregorianRule),
 }
 
-/// Trigger at specific gregorian times of significance.
+/// Trigger at specific gregorian times of significance. To use this type, you generally need to find the next date and time that matches the rule (with possible exclusions sa. GregorianSpan).
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum GregorianRule {
     Annual { month: u32, day: u32, clock: Clock },

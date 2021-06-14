@@ -1,4 +1,4 @@
-use chrono::{DateTime, Local, NaiveTime, Timelike, Utc};
+use chrono::{DateTime, Local, NaiveTime, Timelike};
 use serde::{Deserialize, Serialize, Serializer};
 
 pub type LocalTime = DateTime<Local>;
@@ -17,7 +17,7 @@ impl Serialize for Time {
         S: Serializer,
     {
         // Time with truncated nanoseconds
-        s.serialize_newtype_struct("Time", &self.0.with_nanosecond(0).unwrap_or(self.0.clone()))
+        s.serialize_newtype_struct("Time", &self.0.with_nanosecond(0).unwrap_or(self.0))
     }
 }
 
@@ -27,9 +27,6 @@ impl Serialize for Clock {
         S: Serializer,
     {
         // Time with truncated nanoseconds
-        s.serialize_newtype_struct(
-            "Clock",
-            &self.0.with_nanosecond(0).unwrap_or(self.0.clone()),
-        )
+        s.serialize_newtype_struct("Clock", &self.0.with_nanosecond(0).unwrap_or(self.0))
     }
 }
